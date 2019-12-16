@@ -1,73 +1,31 @@
-public class SimpleDotComGame {
-    public static void main(String args[]) {
-       int numOfGuesses = 0;
-       
-       GameHelper helper = new GameHelper();
-       
-       SimpleDotCom theDotCom = new SimpleDotCom();
-       
-       int rendomNum = (int) (Math.random() * 5);
-       
-       int[] locations = {randomNum, randomNum + 1, randomNum + 2};
-       theDotCom.setLocationCells(locations);
-       boolean isAlive = true;
-       
-       while(isAlive == true){
-        String guess = helper.getUserInput("Введите число");
-        String result = theDotCom.checkYourself(guess);
-        numOfGuesses++;
-        if(result.equals("Потопил")){
-            isAlive = false;
-            System.out.println("Потребовалось " + numOfGuesses + " попыток");
-        }
-       }
-    }
-}
-class SimpleDotCom{
-    int[] locationCells;
-    int numOfHits = 0;
-    
-    public void setLocationCells(int[] locs){
-        locationCells = locs;
-    }
-    public String checkYourself(String stringGuess){
-        int guess = Integer.parseInt(stringGuess);
-        String result = "Мимо";
+public class DotCom{
+ private ArrayList<String> locationCells;
+  private String name;
+  
+  public void setLocationCells(ArrayList<String> loc){
+  	locationCells = loc;
+  public void setName(String n){
+  name = n;
+  }
+  public String checkYourseld (String userInput){
+  String result = "Мимо";
+    int index = locationCells.indexOF(userInput){
+      if (index >=0 ){
+      	locationCells.remove(index);
         
-        for (int cell : locationCells){
-            if(guess == cell){
-                result = "Попал";
-                numOfHits++;
-                break;
-            }
+        if (locationCells.isEmpty()){
+        	result = "Потопил";
+          System.out.print("Ой! Вы потопили" + name + " :( ");
+        }else{
+        	result = "Попал";
         }
-        if(numOfHits == locationCells.length){
-            result = "Потопил";        
-        }
-        System.out.println(result);
-        return result;
+      }
+      return result;
     }
+  }
 }
-public class GameHelper{
-    public String getUserInput(String prompt){
-        String inputLine = null;
-        System.out.print(prompt + " ");
-        try{
-            BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
-            inputLine = is.readLine();
-            if (inputLine.length() == 0){ 
-            return null;
-            
-            catch (IOException e){
-                System.out.println("IOException: " + e);
-            }
-            return inpuLine;
-        }
-    }
-}
---------------------------------------------------------------------------------------------
-    
-    import java.util.*;
+
+import java.util.*;
 public class BotComBust{
   private GameHelper helper = new GameHelper();
   private ArrayList<DotCom> dotComsList = new ArrayList<DotCom>();
@@ -84,7 +42,7 @@ public class BotComBust{
     dotComsList.add(two);
     dotComsList.add(three);
     
-    System.out.println("Ваша цель - потопить три "сайта".");
+    System.out.println("Ваша цель - потопить три сайта.");
     System.out.println("Pets.com, eToys.com, Go2.com");
     System.out.println("Попытайтесь потопить их за минимальное количество ходов");
     
@@ -119,7 +77,7 @@ public class BotComBust{
     System.out.plintln(result);
   }
   private void finishGame(){
-    System.out.plintln("Все "сайты" ушли ко дну! Ваши акции теперь ничего не стоятю");
+    System.out.plintln("Все сайты ушли ко дну! Ваши акции теперь ничего не стоятю");
     if (numOfGuesses <= 18){
     	System.out.plintln("Это заняло у вас всего" + numOfGuesses + "попыток.");
       	System.out.plintln("Вы успели выбраться до того, как ваши вложения утонули.");
@@ -133,5 +91,4 @@ public static void main(String[] args){
   game.setUpGame();
   game.startPlaying();
 	}
-}  
-
+}
